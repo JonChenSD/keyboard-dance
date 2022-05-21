@@ -18,8 +18,8 @@ function preload() {
   // img2 = loadImage('assets/fingerprint/fingerprint2.png');
 }
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  
+  var myCanvas = createCanvas(windowWidth, windowHeight);
+  myCanvas.parent("danceContainer");
   
 }
 function rotate_and_draw_image(img_x, img_y, img_width, img_height, img_angle){

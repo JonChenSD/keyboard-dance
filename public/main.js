@@ -1,4 +1,5 @@
 let socket;
+let butterfly
 let address = 'http://localhost:3000'
 let mode = "finger"
 var angle = 0;
@@ -13,48 +14,129 @@ let keyboardCodes = {
   row3: [90,88,67,86,66,78,77,188,190,191]
 }
 let time = 0;
+let stateNumber = 0;
+let states = ['baseball', 'stoneHenge','butterfly']
+let currentState = {
+  backgroundimage: 'assets/baseballcircle.png',
+  // sticker: baseball,
+
+}
 const keyboardtexts = document.getElementById('keyboardletters')
 const resetbtn = document.getElementById('reset')
+const next = document.getElementById('next')
+const back = document.getElementById('back')
 resetbtn.onclick = function(){drawnKeyCodes = []};
 function preload() {
+  butterfly = loadImage('assets/butterfly2.gif');
   img1 = loadImage('assets/fingerprint/fingerprint1.png');
   baseballback = loadImage('assets/baseball.png');
   baseball = loadImage('assets/baseballcircle.png')
   baseballtitle = loadImage('assets/baseballtitle.png')
   one = loadImage('assets/1.png')
+  stone = loadImage('assets/stone.png')
   akeyboarddance1 = loadImage('assets/a keyboard dance 1.png')
   // img2 = loadImage('assets/fingerprint/fingerprint2.png');
 }
+
+
+next.addEventListener("mouseup", nextFnc);
+back.addEventListener("mouseup", backFnc)
+function nextFnc(){
+  console.log('click')
+  if (stateNumber < states.length){
+    stateNumber = stateNumber + 1
+    console.log(stateNumber)
+    setScene()
+  } else{
+
+  }
+}
+function backFnc(){
+  console.log('click')
+  if (stateNumber > 0){
+    stateNumber = stateNumber - 1
+    console.log(stateNumber)
+    setScene()
+  } else{
+
+  }
+}
+
+function setScene(){
+  let canvas = document.getElementById('defaultCanvas0')
+  let canvasContainer = document.getElementById('canvasContainer')
+  if(stateNumber == 0) {
+    canvasContainer.style.width = "1100px"
+    canvasContainer.style.height = "600px"
+    resizeCanvas(1100,600)
+    canvasContainer.style.backgroundImage = "url(assets/baseball.png)"
+    canvas.style.transform= 'rotateX(0deg)'
+    canvas.style.position='absolute'
+    canvas.style.top = '0px'
+    // canvasContainer.style.perspectiveOrigin = "10px 50%"
+    canvasContainer.style.perspective = "0px"
+  }
+  else if(stateNumber == 1){
+    canvasContainer.style.width = "600px"
+    canvasContainer.style.height = "559px"
+    resizeCanvas(800, 559)
+    console.log(canvas)
+    // canvas.style.transform = "rotate(7deg)";
+    canvas.style.transform= 'rotateX(45deg)'
+    // canvasContainer.style.perspectiveOrigin = "10px 50%"
+    canvasContainer.style.perspective = "400px"
+    canvasContainer.style.backgroundImage = "url(assets/stonehenge.png)"
+    canvas.style.position='absolute'
+    canvas.style.top = '0px'
+    // drawnKeyCodes = []
+  }
+  else if(stateNumber == 2){
+    console.log('statenumber 2')
+    canvasContainer.style.width = "600px"
+    canvasContainer.style.height = "900px"
+    canvasContainer.style.backgroundImage = "url(assets/garden.png)"
+    canvasContainer.style.perspective = "100px"
+    canvas.style.transform = 'rotateX(347deg) rotateY(42deg)'
+    // canvasContainer.style.perspectiveOrigin = "10px 50%"
+    canvasContainer.style.perspective = "400px"
+    canvas.style.position='absolute'
+    canvas.style.top = '194px'
+  }
+  changeKeyboardDim()
+}
 function setup() {
+  pixelDensity(10.0);
   textAlign(CENTER, CENTER);
-  createCanvas(windowWidth, windowHeight);
+  var myCanvas = createCanvas(1100,600);
+  myCanvas.parent("canvasContainer");
   
 
 }
 
 function draw() {
-   
-  if(mode = "finger"){
-    // translate(width / 2, height / 2);
-    // // image(img2, 100, 100,80,80);
-    // rotate(PI / 180 * Math.random()* 360);
-    // imageMode(CENTER);
-    // image(img1, crosshairX, crosshairY, 40, 40);
-    drawFinger();
-  noFill();
-  }else{
-    glyphDraw(glyph)
-    stroke("#3A3E59")
-  }
+  clear();
+
+  // if(mode = "finger"){
+  //   // translate(width / 2, height / 2);
+  //   // // image(img2, 100, 100,80,80);
+  //   // rotate(PI / 180 * Math.random()* 360);
+  //   // imageMode(CENTER);
+  //   // image(img1, crosshairX, crosshairY, 40, 40);
+  //   drawFinger();
+  // noFill();
+  // }else{
+  //   glyphDraw(glyph)
+  //   stroke("#3A3E59")
+  // }
   push()
   rectMode(CENTER)
   translate(width / 2, height / 2);
-  fill(255,255,255)
-  rect(0,12,1150,680)
+  // fill(255,255,255)
+  // rect(0,12,1150,680)
   pop()
   imageMode(CENTER)
   translate(width / 2, height / 2);
-  image(baseballback,0,0,1100,600)
+  // image(baseballback,0,0,1100,600)
   image(baseballtitle,-12,320,120,35)
   image(akeyboarddance1,470,327,200,55)
   image(one,-540,327,44,48)
@@ -80,11 +162,10 @@ function draw() {
   if(time >= 1){
   
     changed = true
-    console.log('changed to true',changed)
+    // console.log('changed to true',changed)
   } else {
     changed = false
     time += .01
-    
     
   } 
   //  if else (  ) {
@@ -100,12 +181,35 @@ function draw() {
     }
     let x = curvePoint(indexforCurveX[0], indexforCurveX[1], indexforCurveX[2], indexforCurveX[3], time);
     let y = curvePoint(indexforCurveY[0], indexforCurveY[1], indexforCurveY[2], indexforCurveY[3], time);
-    push()
+    if(stateNumber == 0){
+      push()
     
-    translate(x, y);
-    rotate(radians(1080* time));
-    image(baseball,0, 0, 20, 20);
-    pop()
+      translate(x, y);
+      rotate(radians(1080* time));
+      image(baseball,0, 0, 20, 20);
+      pop()
+    }
+    if(stateNumber == 1){
+      translate(indexforCurveX[2], indexforCurveY[2]);
+      rotate(radians(45 * indexCodesX.length));
+      image(stone,0, 0, 30, 55);
+    }
+    if(stateNumber == 2){
+      push()
+    
+      // translate(x, y);
+      // if(time >= 1){
+      //   console.log('pause')
+      //   butterfly.pause()
+      // }else{
+      //   butterfly.play()
+      // }
+      // image(butterfly,0,0,50,50)
+      
+      // image(baseball,0, 0, 20, 20);
+      pop()
+    }
+   
     
    }
    keyboardtexts.innerText = drawnKeyCodes.join('')
@@ -125,7 +229,36 @@ function draw() {
   
 
    
-
+function changeKeyboardDim(){
+  if(stateNumber == 0) {
+    baseballkeys = ['Z','D','T','9',']']
+    keywidth = 40;
+    keyheight = 40;
+    keygapw = 40;
+    keygaph = 110;
+    startX = -90
+    startY = 40
+    
+  }
+  else if(stateNumber == 1){
+    baseballkeys = ['V','H','R','8']
+    keywidth = 40;
+    keyheight = 40;
+    keygapw = 5;
+    keygaph = 80;
+    startX = 75;
+    startY = 30;
+  }
+  else if(stateNumber == 2){
+    baseballkeys = ['W','4','C','H','I','/']
+    keywidth = 50;
+    keyheight = 40;
+    keygapw = 5;
+    keygaph = 80;
+    startX = -30;
+    startY = 30;
+  }
+}
 
 let row1key = ['1','2','3','4','5','6','7','8','9','0','-','=']
 let row2key = ['Q','W','E','R','T','Y','U','I','O','P','[',']']
@@ -145,8 +278,10 @@ let indexCodesY = [];
 let keyColor = 'rgba(245,245,245, 1)';
 let keyBackColor = 'rgba(40,40,40, 1)';
 let fontSize = 13;
-let dotRadius = 10;
+let dotRadius = 17;
 let lastKey = [0,0];
+let startX = -90
+let startY = 40
 
 function drawLine(){
   
@@ -155,12 +290,11 @@ function drawLine(){
     stroke("#ffffff")
     strokeWeight(1.5)
     fill('rgba(0,0,0,0')
-    let offsetX = (keywidth * 7 + keygapw * 7 -90);
-    let offsetY = (keyheight * 2 + keygaph * 1.5 + 40);
+    let offsetX = (keywidth * 7 + keygapw * 7 + startX);
+    let offsetY = (keyheight * 2 + keygaph * 1.5 + startY);
     beginShape();
     fill('rgba(0,0,0,0')
     drawnKeyCodes.forEach((element,key,drawnKeyCodes) => {
-        console.log(element)
         function drawCurveVertex(){
           for(let i = 0; i < 12;i++){
             let centeredX = keywidth/2+((keywidth + keygapw) * (i)) - offsetX
@@ -171,11 +305,11 @@ function drawLine(){
               curveVertex( centeredX, centeredY);
               indexCodesX.push(centeredX)
               indexCodesY.push(centeredY)
-              console.log('doublestart')
+
             }
               lastKey = [centeredX,centeredY];
               curveVertex( centeredX, centeredY);
-              console.log(element, "inside the row",i);
+              
               ellipse(centeredX, centeredY, dotRadius, dotRadius);
               indexCodesX.push(centeredX)
               indexCodesY.push(centeredY)
@@ -187,7 +321,7 @@ function drawLine(){
               if(element == (row2key[i])){
               let centeredX = keywidth/2+((keywidth + keygapw) * (i)) - offsetX + (keywidth+keygapw)/2
               let centeredY = keywidth/2+(keywidth+keygaph) - offsetY
-              strokeWeight(1)
+              strokeWeight(2)
               fill('rgba(0,0,0,0)')
               if(key == 0){
                 curveVertex( centeredX, centeredY);
@@ -208,7 +342,7 @@ function drawLine(){
               if(element == (row3key[i])){
               let centeredX = keywidth/2+((keywidth + keygapw) * (i)) - offsetX + 2*(keywidth+keygapw)/2
               let centeredY = keywidth/2+ (keywidth+keygaph) * 2 - offsetY
-              strokeWeight(1)
+              strokeWeight(2)
               fill('rgba(0,0,0,0)')
               if(key == 0){
                 curveVertex( centeredX, centeredY);
@@ -229,13 +363,13 @@ function drawLine(){
               if(element == (row4key[i])){
               let centeredX = keywidth/2+((keywidth + keygapw) * (i)) - offsetX + 3*(keywidth+keygapw)/2
               let centeredY = keywidth/2+ (keywidth+keygaph) * 3 - offsetY
-              strokeWeight(1)
+              strokeWeight(2)
               fill('rgba(0,0,0,0)')
             if(key == 0){
                 curveVertex( centeredX, centeredY);
                 indexCodesX.push(centeredX)
               indexCodesY.push(centeredY)
-                console.log('doublestart')
+
               }
               lastKey = [centeredX,centeredY];
              
@@ -267,10 +401,10 @@ function drawLine(){
           //   console.log('reached end')
           //   drawCurveVertex()
           // } 
-          console.log(indexCodesX)
+         
         
     });
-    console.log("lastchanged and lastkey", lastchangedvalue, lastKey)
+    // console.log("lastchanged and lastkey", lastchangedvalue, lastKey)
     if(lastchangedvalue[0] != lastKey[0]){
       changed = false
       time = 0
@@ -288,8 +422,8 @@ function drawKeys(){
     rectMode(CORNER)
     stroke("#ffffff")
     strokeWeight(1.5)
-    let offsetX = (keywidth * 7 + keygapw * 7 -90);
-    let offsetY = (keyheight * 2 + keygaph * 1.5 + 40)
+    let offsetX = (keywidth * 7 + keygapw * 7 + startX);
+    let offsetY = (keyheight * 2 + keygaph * 1.5 + startY)
     for(let i = 0; i < 12;i++){
         if(baseballkeys.includes(row1key[i])){
            
@@ -407,10 +541,7 @@ function drawFinger(){
   } else if(keyboardCodes.row3.includes(printedValue)){
     drawnKeyCodes.push(printedValue)
     printedValue = null;
-  } else if(printedValue == 32){z
-    drawnKeyCodes.push(printedValue)
-    printedValue = null;
-  }
+  } 
 }
 
 function glyphDraw(type){
@@ -446,7 +577,13 @@ function glyphDraw(type){
 function keyPressed() {
   printedValue = keyCode
   print(printedValue, drawnKeyCodes)
-  drawnKeyCodes.push(keyCodeToChar[printedValue])
+  if(row1key.concat(row2key,row3key,row4key).includes(keyCodeToChar[printedValue])){
+    drawnKeyCodes.push(keyCodeToChar[printedValue])
+  }
+  if((keyCodeToChar[printedValue]) == "Backspace"){
+    console.log('backspace')
+    drawnKeyCodes.slice(0,-1)
+  }
   drawLine()
   if (keyCode === 65) {
     crosshairX = crosshairX - distance;
@@ -485,7 +622,7 @@ function keyPressed() {
   }
 }
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  // resizeCanvas(windowWidth, windowHeight);
 }
 
 keyCodeToChar = {8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",91:"Windows",93:"Right Click",96:"Numpad 0",97:"Numpad 1",98:"Numpad 2",99:"Numpad 3",100:"Numpad 4",101:"Numpad 5",102:"Numpad 6",103:"Numpad 7",104:"Numpad 8",105:"Numpad 9",106:"Numpad *",107:"Numpad +",109:"Numpad -",110:"Numpad .",111:"Numpad /",112:"F1",113:"F2",114:"F3",115:"F4",116:"F5",117:"F6",118:"F7",119:"F8",120:"F9",121:"F10",122:"F11",123:"F12",144:"Num Lock",145:"Scroll Lock",182:"My Computer",183:"My Calculator",186:";",187:"=",188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'"};
