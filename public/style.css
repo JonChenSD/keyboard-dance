@@ -106,7 +106,7 @@ canvas {
 @media (max-width: 600px) {
   #danceContainer {
     all:unset;
-    zoom: 34%;
+    zoom: 32%;
     z-index: 8;
     position: none;
     top: none;
@@ -151,7 +151,7 @@ canvas {
     right: 8px;
   }
   #keyboardText{
-   
+   z-index: 9;
     display: initial;
     /* vertical-align: middle; */
     /* left: 20px; */
