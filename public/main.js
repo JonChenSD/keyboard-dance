@@ -105,7 +105,7 @@ function setScene(){
   changeKeyboardDim()
 }
 function setup() {
-  pixelDensity(6.0);
+  pixelDensity(2.0);
   textAlign(CENTER, CENTER);
   var myCanvas = createCanvas(1100,600);
   myCanvas.parent("canvasContainer");

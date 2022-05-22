@@ -41,6 +41,7 @@ h1{
   height: 30px;
 }
 #reset{
+  height: 36px;
   cursor: pointer;
   z-index: 5;
   position: absolute;
@@ -127,7 +128,7 @@ canvas {
     padding: 30px;
     background: white;
     position: fixed;
-    top: 45%;
+    top: 38%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -177,7 +178,7 @@ canvas {
     padding: 4px;
     background: white;
     position: fixed;
-    top: calc(45% - 203px);
+    top: calc(38% - 203px);
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
