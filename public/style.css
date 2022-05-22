@@ -1,5 +1,5 @@
 body {
-  font-family: 'League Script', cursive;
+ 
   background: #E8E7DE;
  
   padding: 0;
@@ -12,6 +12,11 @@ canvas{
   z-index: 3;
 }
 button{
+  border-width: 2px;
+    border-color: #B6B6B6;
+    border-radius: 3px;
+    border-style: solid;
+    background: #F1F1F1;
   z-index: 4;
 }
 h1{
@@ -21,16 +26,14 @@ h1{
   font-weight: 200;
 }
 #back{
-  color: white;
-  background-color: black;
+
   position: absolute;
   left: 20px;
   bottom: 50vh;
   height: 30px;
 }
 #next{
-  color: white;
-  background-color: black;
+ 
   position: absolute;
   right: 20px;
   bottom: 50vh;
@@ -87,6 +90,7 @@ h1{
     background: white;
 }
 #keyboardletters{
+  font-family: 'League Script', cursive;
   margin: 0;
   word-wrap: break-word;
     font-size: 120px;
@@ -101,11 +105,15 @@ canvas {
 }
 #keyboardText{
   display: none;
+  
 }
 
 @media (max-width: 600px) {
+  #keyboardletters{
+    font-size: 64px;
+  }
   #danceContainer {
-    all:unset;
+    all: unset;
     zoom: 32%;
     z-index: 8;
     position: none;
@@ -113,13 +121,17 @@ canvas {
     left: none;
     -webkit-transform: none;
     transform: none;
-    margin: 16px;
+    /* margin: 16px; */
     padding: 30px;
     background: white;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
   }
   #next {
-    color: white;
-    background-color: black;
+    
     position: absolute;
     right: 98px;
     left: calc((100% - 24px - 82px)/2 + 12px);
@@ -130,11 +142,10 @@ canvas {
   #about{
     bottom: 50px;
     right: -2px;
-;
+
   }
   #back {
-    color: white;
-    background-color: black;
+
     position: absolute;
     bottom: 8px;
     height: 30px;
@@ -144,17 +155,33 @@ canvas {
     height: 36px;
   }
   #reset{
-    color: white;
-    background-color: black;
+  
     position: absolute;
     bottom: 8px;
     right: 8px;
   }
   #keyboardText{
-   z-index: 9;
+    z-index: 9;
     display: initial;
-    /* vertical-align: middle; */
-    /* left: 20px; */
-   
+    all: unset;
+    /* zoom: 32%; */
+    z-index: 8;
+    position: none;
+    top: none;
+    left: none;
+    -webkit-transform: none;
+    transform: none;
+    /* margin: 16px; */
+    padding: 4px;
+    background: white;
+    position: fixed;
+    top: calc(30% - 203px);
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-width: 1px;
+    border-color: #2d2d2d;
+    border-radius: 3px;
+    border-style: solid;
   }
 }
