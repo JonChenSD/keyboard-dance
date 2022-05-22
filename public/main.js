@@ -105,7 +105,7 @@ function setScene(){
   changeKeyboardDim()
 }
 function setup() {
-  pixelDensity(10.0);
+  pixelDensity(3.0);
   textAlign(CENTER, CENTER);
   var myCanvas = createCanvas(1100,600);
   myCanvas.parent("canvasContainer");
@@ -197,14 +197,14 @@ function draw() {
     if(stateNumber == 2){
       push()
     
-      // translate(x, y);
-      // if(time >= 1){
-      //   console.log('pause')
-      //   butterfly.pause()
-      // }else{
-      //   butterfly.play()
-      // }
-      // image(butterfly,0,0,50,50)
+      translate(x, y);
+      if(time >= 1){
+        console.log('pause')
+        butterfly.pause()
+      }else{
+        butterfly.play()
+      }
+      image(butterfly,0,0,50,50)
       
       // image(baseball,0, 0, 20, 20);
       pop()

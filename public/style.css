@@ -69,6 +69,7 @@ h1{
   left: 0px;
 }
 #canvasContainer{
+  z-index: 7;
   background-size:     cover;                      /* <------ */
   background-repeat:   no-repeat;
   background-position: center center; 
@@ -94,7 +95,7 @@ h1{
     white-space: normal;
 }
 canvas {
-  
+  z-index: 12;
   /* transform:rotateX(45deg);
   perspective-origin: (50%); */
 }
