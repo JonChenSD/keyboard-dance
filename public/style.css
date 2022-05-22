@@ -6,6 +6,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 canvas{
   z-index: 3;
@@ -149,12 +150,10 @@ canvas {
     right: 8px;
   }
   #keyboardText{
-    position: absolute;
-    /* display: block; */
+   
     display: initial;
     /* vertical-align: middle; */
     /* left: 20px; */
-    top: 381px;
-    margin-left: 30px;
+   
   }
 }
