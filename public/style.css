@@ -126,9 +126,10 @@ canvas {
     transform: none;
     /* margin: 16px; */
     padding: 30px;
+    padding-bottom: 0;
     background: white;
     position: fixed;
-    top: 38%;
+    top: 34%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
@@ -178,7 +179,7 @@ canvas {
     padding: 4px;
     background: white;
     position: fixed;
-    top: calc(38% - 203px);
+    top: calc(34% - 203px);
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
